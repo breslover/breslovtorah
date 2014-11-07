@@ -10,9 +10,9 @@ class Shiur(models.Model):
     TYPES_SHORTDAILY = 'SHORTDAILY'
     
     TYPES = (
-        (u'DAILYSHIUR', u'Daily shiur'),
-        (u'WEEKLYSHIUR', u'Weekly shiur'),
-        (u'SHORTDAILY', u'Video clip of the day!'),
+        (TYPES_DAILYSHIUR, u'Daily shiur'),
+        (TYPES_WEEKLYSHIUR, u'Weekly shiur'),
+        (TYPES_SHORTDAILY, u'Video clip of the day!'),
     )
     
     type = models.CharField(max_length=5, choices=TYPES)
