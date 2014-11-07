@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     
     # frontpage
     'breslovtorah.frontpage',
+    'breslovtorah.shiur',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,4 +89,53 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 STATICFILES_DIRS = ( 
                         os.path.join(BASE_DIR,'breslovtorah/frontpage/static/'),
                     )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'frontpage.views': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+       
+    }
+}
+
 

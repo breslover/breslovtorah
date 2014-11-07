@@ -156,6 +156,11 @@ a:focus {
     margin-bottom: 15px;
 }
 
+.intro .intro-body .brand-daily-shiur {
+    font-size: 50px ! important;
+    margin-bottom: 15px;
+}
+
 .intro .intro-body .intro-text {
     font-size: 18px;
 }
