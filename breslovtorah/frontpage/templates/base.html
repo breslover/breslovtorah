@@ -80,7 +80,7 @@
                     <div class="col-md-8 col-md-offset-2">
                     	
                     	{% if daily_shiur %}
-                    		<h1 class="brand-heading brand-daily-shiur">{{daily_shiur.title}}</h1>
+                    		<h1 class="brand-heading brand-daily-shiur" style='padding-left:15px;'>{{daily_shiur.title}}</h1>
                     		<iframe id="player_1" style="margin-left: 20px;" src="{{daily_shiur.video_url}}" frameborder="0" width="90%" height="300"></iframe>
                         {% else %}
                         	<h1 class="brand-heading">{% trans "Daily shiur" %}</h1>
