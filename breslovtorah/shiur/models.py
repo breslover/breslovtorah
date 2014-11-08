@@ -5,9 +5,9 @@ from django.template.defaultfilters import slugify
     
 class Shiur(models.Model):
     
-    TYPES_DAILYSHIUR = 'DAILYSHIUR'
-    TYPES_WEEKLYSHIUR = 'WEEKLYSHIUR'
-    TYPES_SHORTDAILY = 'SHORTDAILY'
+    TYPES_DAILYSHIUR =  'DAILY'
+    TYPES_WEEKLYSHIUR = 'WEEKL'
+    TYPES_SHORTDAILY =  'SHORT'
     
     TYPES = (
         (TYPES_DAILYSHIUR, u'Daily shiur'),
