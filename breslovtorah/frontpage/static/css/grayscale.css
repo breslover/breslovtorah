@@ -112,6 +112,8 @@ a:focus {
     background-color: rgba(255,255,255,.3);
 }
 
+
+
 @media(min-width:767px) {
     .navbar {
         padding: 20px 0;
@@ -122,7 +124,21 @@ a:focus {
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
     }
-
+	
+	.navbar-behind {
+		position: fixed;
+		padding: 20px 0;
+		height: 70px;
+		width: 100%;
+		background: #000;
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";       /* IE 8 */
+		filter: alpha(opacity=50);  /* IE 5-7 */
+		-moz-opacity: 0.5;          /* Netscape */
+		-khtml-opacity: 0.5;        /* Safari 1.x */
+		opacity: 0.5;               /* Good browsers */
+		
+	}
+	
     .top-nav-collapse {
         padding: 0;
         background-color: #000;
@@ -156,7 +172,7 @@ a:focus {
 .intro .intro-body .brand-heading {
     font-size: 40px;
     margin-bottom: 15px;
-    text-shadow: 1px 1px 11px rgba(150, 150, 150, 1);
+    text-shadow: 4px 1px 11px rgba(150, 150, 150, 1);
 }
 
 .intro .intro-body .brand-daily-shiur {
