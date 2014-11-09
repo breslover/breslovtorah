@@ -100,7 +100,7 @@ class Command(BaseCommand):
                 shiur = Shiur.objects.filter(title=video_title_innerhtml)[0]
             except:
                 shiur = Shiur()
-                shiur.type = Shiur.TYPES_DAILYSHIUR
+                shiur.type = Shiur.TYPES_SHORTDAILY
                 shiur.title = video_title_innerhtml
                 shiur.video_url = video_iframe_src
                 shiur.user = User.objects.get(username='maimon')
