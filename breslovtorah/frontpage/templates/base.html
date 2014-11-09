@@ -32,6 +32,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/grayscale.js' %}"></script>
 	
+	<style>
+		section#shiurs .list-group-item {
+			text-align: left;
+		}
+	</style>
+	
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -142,6 +148,7 @@
 						
 							{% for sefer in sefers_maimon %}
 								<a href="#" class="list-group-item">
+									<span class="badge"><i class='glyphicon glyphicon-chevron-right'></i></span>
 							  		{{sefer.title|safe}}
 							  	</a>
 							{% endfor %}
