@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index.html$', 'breslovtorah.frontpage.views.home', name='home'),
+    url(r'^sefer/(?P<slug>.*).html$', 'breslovtorah.frontpage.views.sefer', name='sefer'),
     url(r'^$', RedirectView.as_view(url='index.html', permanent=True), name='index')
 )

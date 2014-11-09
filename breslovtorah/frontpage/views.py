@@ -30,3 +30,14 @@ def home(request):
     t = loader.get_template('base.html')
     c = Context({ 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon })
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"
+
+def sefer(request, slug=None):
+    
+    # grab the list of sefarim from the Sefer table
+    sefer = Sefer.objects.get(slug=slug)
+    shiurs = Shiur.objects.filter(sefer__slug=slug)
+    
+    # load the template
+    t = loader.get_template('base_sefer.html')
+    c = Context({ 'shiurs': shiurs, 'sefer': sefer })
+    return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"

@@ -77,7 +77,9 @@
         </div>
         <!-- /.container -->
     </nav>
-
+	
+	{% block content %}
+	
     <!-- Intro Header -->
     <header class="intro">
         <div class="intro-body">
@@ -147,7 +149,7 @@
 						<div class="list-group">
 						
 							{% for sefer in sefers_maimon %}
-								<a href="#" class="list-group-item">
+								<a href="{% url 'sefer' sefer.slug %}" class="list-group-item">
 									<span class="badge"><i class='glyphicon glyphicon-chevron-right'></i></span>
 							  		{{sefer.title|safe}}
 							  	</a>
@@ -219,7 +221,9 @@
             </div>
         </div>
     </section>
-
+	
+	{% endblock %}
+	
     <!-- Footer -->
     <footer>
         <div class="container text-center">

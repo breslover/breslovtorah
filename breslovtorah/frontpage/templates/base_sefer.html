@@ -1,0 +1,52 @@
+{% extends 'base.html' %}{% load i18n %}
+
+{% block content %}
+
+	<!-- Intro Header -->
+    <header class="intro" style='padding-top: 100px;'>
+        <div class="intro-body">
+            <div class="container" style=''>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                    	
+                    	<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">{{sefer.title|safe}}</h3>
+							</div>
+							<div class="panel-body">
+								
+								<div class="list-group">
+								
+									{% for shiur in shiurs %}
+										<div class="list-group-item">
+											<div class="well well-sm" style='color: #666; text-align: left;'>
+												{{shiur.title|safe}}
+											</div>
+									  		<audio style='width: 100%;' controls>
+												<source src="{{shiur.mp3_url}}" type="audio/mpeg" />
+												<a href="{{shiur.mp3_url}}">{{shiur.title|safe}}</a>
+											</audio>
+									  		
+									  	</div>
+									{% endfor %}
+									
+								</div>
+								
+								<ul class="nav nav-pills nav-stacked" role="tablist">
+									<li role="presentation" class="active"><a href="#">Video clips of the day</a></li>
+									<li role="presentation" class="active"><a href="#">Daily full-length shiur</a></li>
+								</ul>
+								
+							</div>
+					    </div>
+                    	
+                        <a href="#" onclick='history.back();return false;' class="btn btn-circle page-scroll">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
