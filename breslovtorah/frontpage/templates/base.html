@@ -139,12 +139,13 @@
 					<div class="panel-body">
 						
 						<div class="list-group">
-						  <a href="#" class="list-group-item">
-						  	Likutei Moharan, Book 1
-						  </a>
-						  <a href="#" class="list-group-item">
-						  	Likutei Moharan, Book 2
-						  </a>
+						
+							{% for sefer in sefers_maimon %}
+								<a href="#" class="list-group-item">
+							  		{{sefer.title|safe}}
+							  	</a>
+							{% endfor %}
+							
 						</div>
 						
 						<ul class="nav nav-pills nav-stacked" role="tablist">
