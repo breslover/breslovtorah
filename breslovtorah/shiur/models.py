@@ -5,6 +5,19 @@ from django.template.defaultfilters import slugify
 # ordered_model
 from ordered_model.models import OrderedModel
 
+class Sefer(OrderedModel):
+    
+    user = models.ForeignKey(User, null=True, blank=True)
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255)
+    
+    class Meta(OrderedModel.Meta):
+        pass
+    
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        self.slug = slugify(self.title)
+        return super(Sefer, self).save(*args, **kwargs)
     
 class Shiur(OrderedModel):
     
@@ -26,6 +39,7 @@ class Shiur(OrderedModel):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True, blank=True)
+    sefer = models.ForeignKey(Sefer, null=True, blank=True)
     
     class Meta(OrderedModel.Meta):
         pass
