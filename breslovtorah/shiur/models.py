@@ -2,8 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
+# ordered_model
+from ordered_model.models import OrderedModel
+
     
-class Shiur(models.Model):
+class Shiur(OrderedModel):
     
     TYPES_DAILYSHIUR =  'DAILY'
     TYPES_WEEKLYSHIUR = 'WEEKL'
@@ -19,9 +22,13 @@ class Shiur(models.Model):
     title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     video_url = models.URLField(null=True, blank=True)
+    mp3_url = models.URLField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True, blank=True)
+    
+    class Meta(OrderedModel.Meta):
+        pass
     
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''

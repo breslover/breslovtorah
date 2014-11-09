@@ -1,2 +1,3 @@
 django
 beautifulsoup4
+https://github.com/bfirsh/django-ordered-model/archive/master.zip

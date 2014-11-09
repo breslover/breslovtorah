@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # ordered_model
+    'ordered_model',
+    
     # frontpage
     'breslovtorah.frontpage',
     'breslovtorah.shiur',
