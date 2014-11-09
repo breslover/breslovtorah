@@ -45,6 +45,7 @@ class Command(BaseCommand):
                     sefer = Sefer()
                     sefer.user = User.objects.get(username='maimon')
                     sefer.title = title_innerhtml
+                    sefer.title_friendly = title_innerhtml
                     sefer.save()
                     self.stdout.write('saved sefer by title...')
                     

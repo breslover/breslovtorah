@@ -9,6 +9,7 @@ class Sefer(OrderedModel):
     
     user = models.ForeignKey(User, null=True, blank=True)
     title = models.CharField(max_length=255, unique=True)
+    title_friendly = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     
     class Meta(OrderedModel.Meta):
