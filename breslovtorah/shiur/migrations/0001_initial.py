@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(unique=True, max_length=255)),
                 ('slug', models.SlugField(max_length=255)),
                 ('video_url', models.URLField(null=True, blank=True)),
+                ('mp3_url', models.URLField(null=True, blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
                 ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),

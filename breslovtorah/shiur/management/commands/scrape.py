@@ -16,10 +16,19 @@ class Command(BaseCommand):
             action='store_true',
             dest='frontpage',
             help='Scrape the front-page for the daily video, etc.'),
+        make_option('--mp3',
+            action='store_true',
+            dest='mp3',
+            help='Scrape the different categories on the left hand side of breslovtorah.com and add to the db, etc.'),
     )
         
     def handle(self, *args, **options):
         
+        if 'mp3' in options:
+            self.stdout.write('mp3... start')
+            
+            self.stdout.write('mp3... stop')
+            
         if 'frontpage' in options:
             self.stdout.write('frontpage... start')
             response = urllib2.urlopen('http://www.breslovtorah.com/')
