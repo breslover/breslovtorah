@@ -22,7 +22,7 @@ class Command(BaseCommand):
             dest='mp3',
             help='Scrape the different categories on the left hand side of breslovtorah.com and add to the db, etc.'),
     )
-        
+    
     def handle(self, *args, **options):
         
         if 'mp3' in options and options['mp3']:
@@ -81,6 +81,47 @@ class Command(BaseCommand):
                         shiur.user = User.objects.get(username='maimon')
                         shiur.save()
                         self.stdout.write('saving shiur...')
+                
+                # handle the page #s
+                pages_larger = soup.select('div.wp-pagenavi a.larger')
+                self.stdout.write('pages_larger: %s' % pages_larger)
+                
+                for p in pages_larger:
+                    href = p.attrs.get('href')
+                    self.stdout.write('href: %s' % href)
+                    
+                    response = urllib2.urlopen(href)
+                    soup = bs4.BeautifulSoup(response)
+                    shiur_titles_mp3 = soup.select('div#content li p')
+                    shiur_titles_mp3 = iter(shiur_titles_mp3)
+                    for t_mp3 in shiur_titles_mp3:
+                        object = t_mp3.findNext('object')
+                        self.stdout.write('object: %s' % object)
+                        try:
+                            object_mp3 = object.select('param[name="FlashVars"]')[0]['value']
+                            object_mp3 = object_mp3.replace('mp3=', '').replace('&showvolume=1','')
+                        except:
+                            next(shiur_titles_mp3, None)
+                            
+                        self.stdout.write('object_mp3: %s' % object_mp3)
+                        title = t_mp3.a.decode_contents(formatter="html")
+                        self.stdout.write('title: %s' % title)
+                        self.stdout.write('--------')
+                        
+                        # save to db
+                        try:
+                            shiur = Shiur.objects.filter(title=title, sefer=sefer)[0]
+                            self.stdout.write('found shiur by title, not saving...')
+                        except:
+                            shiur = Shiur()
+                            shiur.type = Shiur.TYPES_DAILYSHIUR
+                            shiur.title = title
+                            shiur.mp3_url = object_mp3
+                            shiur.sefer = sefer
+                            shiur.user = User.objects.get(username='maimon')
+                            shiur.save()
+                            self.stdout.write('saving shiur...')
+                    
                         
             self.stdout.write('mp3... stop')
             

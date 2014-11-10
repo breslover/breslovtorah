@@ -18,7 +18,7 @@
 								<div class="list-group">
 								
 									{% for shiur in shiurs %}
-										<div class="list-group-item">
+										<div class="list-group-item" style='background-color: transparent;'>
 											<div class="well well-sm" style='color: #666; text-align: left;'>
 												<span style='float:right;' class="badge">{% if shiur.user.first_name %}{{shiur.user.first_name}} {{shiur.user.last_name}}{% else %}{{shiur.user}}{% endif %}</span>
 												{{shiur.title|safe}}
