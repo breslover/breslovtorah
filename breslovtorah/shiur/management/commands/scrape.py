@@ -44,13 +44,13 @@ class Command(BaseCommand):
                 self.stdout.write('-----------------------')
                 
                 try:
-                    sefer = Sefer.objects.filter(title=title_innerhtml)[0]
+                    sefer = Sefer.objects.filter(title=title_innerhtml.strip())[0]
                     self.stdout.write('found sefer by title, not saving...')
                 except:
                     sefer = Sefer()
                     sefer.user = User.objects.get(username='maimon')
-                    sefer.title = title_innerhtml
-                    sefer.title_friendly = title_innerhtml
+                    sefer.title = title_innerhtml.strip()
+                    sefer.title_friendly = title_innerhtml.strip()
                     sefer.save()
                     self.stdout.write('saved sefer by title...')
                     
@@ -78,7 +78,7 @@ class Command(BaseCommand):
                     
                     # save to db
                     try:
-                        shiur = Shiur.objects.filter(title=title, sefer=sefer)[0]
+                        shiur = Shiur.objects.filter(title=title.strip(), sefer=sefer)[0]
                         self.stdout.write('found shiur by title, not saving...')
                     except:
                         shiur = Shiur()
@@ -126,7 +126,7 @@ class Command(BaseCommand):
                             
                             # save to db
                             try:
-                                shiur = Shiur.objects.filter(title=title, sefer=sefer)[0]
+                                shiur = Shiur.objects.filter(title=title.strip(), sefer=sefer)[0]
                                 self.stdout.write('found shiur by title, not saving...')
                             except:
                                 shiur = Shiur()
