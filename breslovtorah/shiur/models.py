@@ -33,8 +33,9 @@ class Shiur(OrderedModel):
     )
     
     type = models.CharField(max_length=5, choices=TYPES)
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
+    wp_url = models.URLField(null=True, blank=True)
     video_url = models.URLField(null=True, blank=True)
     mp3_url = models.URLField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
