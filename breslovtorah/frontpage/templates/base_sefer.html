@@ -8,7 +8,10 @@
 		$(document).ready(function() {
 			$('iframe').waypoint(function(direction) {
 				var data_src = $(this).attr('data-src');
-				$(this).attr('src', data_src);
+				var src = $(this).attr('data-src');
+				if (src != 'about:blank')
+					$(this).attr('src', data_src);
+				
 			}, { offset: '50%' });
 		});
 	
@@ -56,7 +59,7 @@
 											{% endif %}
 											
 											{% if shiur.video_url %}
-									  		<iframe data-src='{{shiur.video_url}}' src='about:blank' style='width:100%; height: 400px;'></iframe>
+									  			<iframe data-src='{{shiur.video_url}}' src='{% if forloop.first %}{{shiur.video_url}}{% else %}about:blank{% endif %}' style='width:100%; height: 400px;'></iframe>
 											{% endif %}
 									  		
 									  	</div>
