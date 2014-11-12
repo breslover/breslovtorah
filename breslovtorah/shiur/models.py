@@ -15,6 +15,9 @@ class Sefer(OrderedModel):
     class Meta(OrderedModel.Meta):
         pass
     
+    def __str__(self):
+        return '%s (%s)' % (self.title, self.id)
+    
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         self.slug = slugify(self.title)
@@ -45,6 +48,9 @@ class Shiur(OrderedModel):
     
     class Meta(OrderedModel.Meta):
         pass
+    
+    def __str__(self):
+        return '%s (%s)' % (self.title, self.id)
     
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''

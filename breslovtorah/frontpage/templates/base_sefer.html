@@ -1,4 +1,20 @@
-{% extends 'base.html' %}{% load i18n %}
+{% extends 'base.html' %}{% load static i18n %}
+
+{% block javascript %}
+	
+	<script src='{% static "js/jquery.appear.js" %}'></script>
+
+	<script>
+		$(document).ready(function() {
+			$('iframe').waypoint(function(direction) {
+				var data_src = $(this).attr('data-src');
+				$(this).attr('src', data_src);
+			}, { offset: '50%' });
+		});
+	
+	</script>
+	
+{% endblock %}
 
 {% block content %}
 
@@ -25,12 +41,23 @@
 										<div class="list-group-item" style='background-color: transparent;'>
 											<div class="well well-sm" style='color: #666; text-align: left;'>
 												<span style='float:right;' class="badge">{% if shiur.user.first_name %}{{shiur.user.first_name}} {{shiur.user.last_name}}{% else %}{{shiur.user}}{% endif %}</span>
-												{{shiur.title|safe}}
+												{% if shiur.wp_url %}
+													<a href='{{shiur.wp_url}}' target='_blank'>{{shiur.title|safe}}</a>
+												{% else %}
+													{{shiur.title|safe}}
+												{% endif %}
 											</div>
+											
+											{% if shiur.mp3_url %}
 									  		<audio style='width: 100%;' controls preload="none">
 												<source src="{{shiur.mp3_url}}" type="audio/mpeg" />
 												<a href="{{shiur.mp3_url}}">{{shiur.title|safe}}</a>
 											</audio>
+											{% endif %}
+											
+											{% if shiur.video_url %}
+									  		<iframe data-src='{{shiur.video_url}}' src='about:blank' style='width:100%; height: 400px;'></iframe>
+											{% endif %}
 									  		
 									  	</div>
 									{% endfor %}

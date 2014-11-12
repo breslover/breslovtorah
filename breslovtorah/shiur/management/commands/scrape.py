@@ -25,10 +25,33 @@ class Command(BaseCommand):
             action='store_true',
             dest='pagination',
             help='Scrape the different categories on the left and visit the pages in each category/sefer.'),
+        make_option('--video',
+            action='store_true',
+            dest='video',
+            help='Scrape the different videos from each category.'),
     
     )
     
     def handle(self, *args, **options):
+        
+        if 'video' in options and options['video']:
+            self.stdout.write('video... start')
+            shiurs_no_mp3 = Shiur.objects.filter(mp3_url=None).filter(video_url=None)
+            for shiur in shiurs_no_mp3:
+                self.stdout.write('shiur: %s' % shiur)
+                if shiur.wp_url:
+                    response = urllib2.urlopen(shiur.wp_url)
+                    soup = bs4.BeautifulSoup(response)
+                    iframe = soup.select('div#content iframe')[0]
+                    iframe_src = iframe.attrs.get('src', None)
+                    if iframe_src:
+                        self.stdout.write('iframe_src: %s' % iframe_src)
+                        shiur.video_url = iframe_src
+                        shiur.save()
+                        self.stdout.write('iframe_src saved!')
+                        self.stdout.write('----------------------')
+                        
+            self.stdout.write('video... stop')
         
         if 'mp3' in options and options['mp3']:
             self.stdout.write('mp3... start')
