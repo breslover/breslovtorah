@@ -66,6 +66,11 @@
                     <li class="hidden">
                         <a href="/index.html#page-top"></a>
                     </li>
+                    {% if request.user.is_authenticated and request.user.is_superuser %}
+                    <li>
+                        <a class="page-scroll" href="/admin">{% trans "Admin" %}</a>
+                    </li>
+                    {% endif %}
                     <li>
                         <a class="page-scroll" href="/index.html#about">{% trans "About" %}</a>
                     </li>

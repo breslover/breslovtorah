@@ -29,7 +29,7 @@ def home(request):
     
     # load the template
     t = loader.get_template('base.html')
-    c = Context({ 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon })
+    c = Context({ 'request': request, 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon, 'sefers_rosenfeld': sefers_rosenfeld })
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"
 
 def sefer(request, slug=None):
@@ -40,5 +40,5 @@ def sefer(request, slug=None):
     
     # load the template
     t = loader.get_template('base_sefer.html')
-    c = Context({ 'shiurs': shiurs, 'sefer': sefer })
+    c = Context({ 'request': request, 'shiurs': shiurs, 'sefer': sefer })
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"
