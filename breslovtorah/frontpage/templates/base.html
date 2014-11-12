@@ -54,7 +54,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="glyphicon glyphicon-align-justify"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
+                <a class="navbar-brand page-scroll" href="/index.html#page-top">
                     <i class="glyphicon glyphicon-play-circle"></i>  <span class="light">Breslov</span>Torah<span class="light">.net</span>
                 </a>
             </div>
@@ -121,9 +121,30 @@
             <div class="col-lg-8 col-lg-offset-2">
             	
             	
+            	<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Rav Tzvi Aryeh Rosenfeld ZT'L Shiurs</h3>
+					</div>
+					<div class="panel-body">
+						
+						<div class="list-group">
+						
+							{% for sefer in sefers_rosenfeld %}
+								<a href="{% url 'sefer' sefer.slug %}" class="list-group-item">
+									<span class="badge"><i class='glyphicon glyphicon-chevron-right'></i></span>
+							  		{{sefer.title|safe}}
+							  	</a>
+							{% endfor %}
+							
+						</div>
+						
+					</div>
+			    </div>
+            	
+            	
 	            <div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Shiurs</h3>
+						<h3 class="panel-title">Rav Nasan Maimon Shiurs</h3>
 					</div>
 					<div class="panel-body">
 						
@@ -138,12 +159,10 @@
 							
 						</div>
 						
-						{% comment %}
-							<ul class="nav nav-pills nav-stacked" role="tablist">
-								<li role="presentation" class="active"><a href="#">Video clips of the day</a></li>
-								<li role="presentation" class="active"><a href="#">Daily full-length shiur</a></li>
-							</ul>
-						{% endcomment %}
+						<ul class="nav nav-pills nav-stacked" role="tablist">
+							<li role="presentation" class="active"><a href="/sefer/videos-reb-nasan-maimon.html">Videos</a></li>
+						</ul>
+						
 						
 					</div>
 			    </div>

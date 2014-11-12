@@ -24,7 +24,8 @@ def home(request):
         daily_shiur = None
         
     # grab the list of sefarim from the Sefer table
-    sefers_maimon = Sefer.objects.filter(user=User.objects.get(username='maimon'))
+    sefers_maimon = Sefer.objects.filter(user__username='maimon')
+    sefers_rosenfeld = Sefer.objects.filter(user__username='rosenfeld')
     
     # load the template
     t = loader.get_template('base.html')
