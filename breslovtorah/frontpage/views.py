@@ -36,7 +36,11 @@ def sefer(request, slug=None):
     
     # grab the list of sefarim from the Sefer table
     sefer = Sefer.objects.get(slug=slug)
-    shiurs = Shiur.objects.filter(sefer__slug=slug)
+    
+    if sefer.sort_descending:
+        shiurs = Shiur.objects.filter(sefer__slug=slug).order_by('-id')
+    else:
+        shiurs = Shiur.objects.filter(sefer__slug=slug)
     
     # load the template
     t = loader.get_template('base_sefer.html')

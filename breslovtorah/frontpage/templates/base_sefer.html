@@ -27,6 +27,7 @@
 	<script src='{% static "js/jquery.appear.js" %}'></script>
 
 	<script>
+		
 		$(document).ready(function() {
 			$('iframe').waypoint(function(direction) {
 				var data_src = $(this).attr('data-src');
@@ -34,7 +35,7 @@
 				if (src != 'about:blank')
 					$(this).attr('src', data_src);
 				
-			}, { offset: '70%' });
+			}, { offset: '70%', triggerOnce: true });
 		});
 	
 	</script>

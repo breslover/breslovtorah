@@ -11,6 +11,7 @@ class Sefer(OrderedModel):
     title = models.CharField(max_length=255, unique=True)
     title_friendly = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
+    sort_descending = models.BooleanField(default=False)
     
     class Meta(OrderedModel.Meta):
         pass

@@ -119,19 +119,35 @@ class Command(BaseCommand):
 
                 # handle the page #s
                 if 'pagination' in options and options['pagination']:
-                    pages_larger = soup.select('div.wp-pagenavi a.larger')
-                    self.stdout.write('pages_larger: %s' % pages_larger)
-                    
-                    for p in pages_larger:
-                        object_mp3 = None
-                        href = p.attrs.get('href')
+                    # the new pagination code for extracting page #s
+                    try:
+                        pages_string = soup.select('div.wp-pagenavi span.pages')[0]
+                        pages_string = pages_string.decode_contents(formatter="html").strip()
+                        self.stdout.write('pages_string: %s' % pages_string)
+                        pages_string = pages_string.replace('Page 1 of ', '')
+                        pages_int = int(pages_string)
+                        self.stdout.write('pages_int: %s' % pages_int)
                         self.stdout.write('href: %s' % href)
+                    except:
+                        pages_int = 0
+                        self.stdout.write('there is no pagination on: %s' % href)
                         
-                        response = urllib2.urlopen(href)
+                    for page_number in range(1, pages_int+1):
+                        self.stdout.write('------------------')
+                        self.stdout.write('------------------')
+                        self.stdout.write('------------------')
+                        self.stdout.write('------------------')
+                        self.stdout.write('------------------')
+                        
+                        href_page = '%s/page/%s/' % (href, page_number)
+                        self.stdout.write('href_page: %s' % href_page)
+                        response = urllib2.urlopen(href_page)
                         soup = bs4.BeautifulSoup(response)
+                    
                         shiur_titles_mp3 = soup.select('div#content li p')
                         shiur_titles_mp3 = iter(shiur_titles_mp3)
                         for t_mp3 in shiur_titles_mp3:
+                            object_mp3 = None
                             object = t_mp3.findNext('object')
                             self.stdout.write('object: %s' % object)
                             try:
