@@ -4,7 +4,7 @@ import urllib2
 import bs4
 
 # django 
-from django.core.management.base import BaseCommand, CommandError, make_option
+from django.core.management.base import BaseCommand, make_option #CommandError
 from django.contrib.auth.models import User
 
 # models
@@ -56,7 +56,7 @@ class Command(BaseCommand):
         if 'mp3' in options and options['mp3']:
             self.stdout.write('mp3... start')
             response = urllib2.urlopen('http://www.breslovtorah.com/')
-            soup = bs4.BeautifulSoup(response)
+            soup = bs4.BeautifulSoup(response, 'html.parser')
             sefer_links = soup.select('div.execphpwidget ul li a')
             for link in sefer_links:
                 href = link.attrs.get('href')
@@ -90,7 +90,9 @@ class Command(BaseCommand):
                         object_mp3 = object.select('param[name="FlashVars"]')[0]['value']
                         object_mp3 = object_mp3.replace('mp3=', '').replace('&showvolume=1','')
                     except:
-                        next(shiur_titles_mp3, None)
+                        self.stdout.write('object_mp3 = None')
+                        #next(shiur_titles_mp3, None)
+                        object_mp3 = None
                         
                     self.stdout.write('object_mp3: %s' % object_mp3)
                     title = t_mp3.a.decode_contents(formatter="html")
@@ -142,8 +144,12 @@ class Command(BaseCommand):
                         href_page = '%s/page/%s/' % (href, page_number)
                         self.stdout.write('href_page: %s' % href_page)
                         response = urllib2.urlopen(href_page)
-                        soup = bs4.BeautifulSoup(response)
-                    
+                        
+                        soup = bs4.BeautifulSoup(response, 'html.parser')
+                        #soup3 = BeautifulSoup(response)
+                        #from pyquery import PyQuery as pq
+                        #d = pq(response)
+                        
                         shiur_titles_mp3 = soup.select('div#content li p')
                         shiur_titles_mp3 = iter(shiur_titles_mp3)
                         for t_mp3 in shiur_titles_mp3:
@@ -154,7 +160,9 @@ class Command(BaseCommand):
                                 object_mp3 = object.select('param[name="FlashVars"]')[0]['value']
                                 object_mp3 = object_mp3.replace('mp3=', '').replace('&showvolume=1','')
                             except:
-                                next(shiur_titles_mp3, None)
+                                self.stdout.write('object_mp3 = None')
+                                #next(shiur_titles_mp3, None)
+                                object_mp3 = None
                                 
                             self.stdout.write('object_mp3: %s' % object_mp3)
                             title = t_mp3.a.decode_contents(formatter="html")
