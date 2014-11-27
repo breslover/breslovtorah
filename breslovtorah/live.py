@@ -16,9 +16,9 @@ ALLOWED_HOSTS = ("*",)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'breslovtorah_live',                      
-        'USER': 'breslovtorah_live',
-        'PASSWORD': 'breslovtorah_live',
+        'NAME': 'breslovtorah',                      
+        'USER': 'breslovtorah',
+        'PASSWORD': 'breslovtorah',
         'HOST': 'localhost'
     }
 }
