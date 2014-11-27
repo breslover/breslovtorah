@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ADMINS = (('Aaron', 'coderam@gmail.com'), )
 
 # Application definition
 
@@ -124,17 +125,17 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['null'],
+            'handlers': ['mail_admins','console'],
             'propagate': True,
             'level': 'INFO',
         },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins','console'],
             'level': 'ERROR',
             'propagate': False,
         },
         'frontpage.views': {
-            'handlers': ['console'],
+            'handlers': ['mail_admins','console'],
             'level': 'INFO',
         },
        
