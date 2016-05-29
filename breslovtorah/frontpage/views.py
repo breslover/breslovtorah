@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 from django.http import HttpResponse
 from django.template import loader, Context
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # models
@@ -34,6 +35,8 @@ def home(request):
 
 def sefer(request, slug=None):
     
+    page = request.GET.get('page', None)
+    
     # grab the list of sefarim from the Sefer table
     sefer = Sefer.objects.get(slug=slug)
     
@@ -41,8 +44,19 @@ def sefer(request, slug=None):
         shiurs = Shiur.objects.filter(sefer__slug=slug).order_by('-id')
     else:
         shiurs = Shiur.objects.filter(sefer__slug=slug)
+        
+    paginator = Paginator(shiurs, 25) # Show 25 contacts per page
+    
+    try:
+        shiurim = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        shiurim = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        shiurim = paginator.page(paginator.num_pages)
     
     # load the template
     t = loader.get_template('base_sefer.html')
-    c = Context({ 'request': request, 'shiurs': shiurs, 'sefer': sefer })
+    c = Context({ 'request': request, 'shiurim': shiurim, 'sefer': sefer })
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"

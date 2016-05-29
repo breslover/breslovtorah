@@ -63,7 +63,7 @@
 								
 								<div class="list-group">
 								
-									{% for shiur in shiurs %}
+									{% for shiur in shiurim %}
 										<div class="list-group-item" style='background-color: transparent;'>
 											<div class="well well-sm" style='color: #666; text-align: left;'>
 												<span style='float:right;' class="badge">{% if shiur.user.first_name %}{{shiur.user.first_name}} {{shiur.user.last_name}}{% else %}{{shiur.user}}{% endif %}</span>
@@ -89,6 +89,22 @@
 									{% endfor %}
 									
 								</div>
+                                
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if shiurim.has_previous %}
+                                            <a class='btn' href="?page={{ shiurim.previous_page_number }}">previous</a>
+                                        {% endif %}
+
+                                        <span class="current">
+                                            Page {{ shiurim.number }} of {{ shiurim.paginator.num_pages }}.
+                                        </span>
+
+                                        {% if shiurim.has_next %}
+                                            <a class='btn' href="?page={{ shiurim.next_page_number }}">next</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
 								
 							</div>
 					    </div>
