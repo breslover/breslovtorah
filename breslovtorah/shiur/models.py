@@ -17,7 +17,7 @@ class Sefer(OrderedModel):
         pass
     
     def __str__(self):
-        return '%s (%s)' % (self.title, self.id)
+        return '%s' % (self.title)
     
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -51,7 +51,7 @@ class Shiur(OrderedModel):
         pass
     
     def __str__(self):
-        return '%s (%s)' % (self.title, self.id)
+        return '%s' % (self.title)
     
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
