@@ -68,7 +68,7 @@
 											<div class="well well-sm" style='color: #666; text-align: left;'>
 												<span style='float:right;' class="badge">{% if shiur.user.first_name %}{{shiur.user.first_name}} {{shiur.user.last_name}}{% else %}{{shiur.user}}{% endif %}</span>
 												{% if shiur.wp_url %}
-													<a href='{{shiur.wp_url}}' target='_blank'>{{shiur.title|safe}}</a>
+													<a href='{{shiur.mp3_url}}' target='_blank'>{{shiur.title|safe}}</a>
 												{% else %}
 													{{shiur.title|safe}}
 												{% endif %}
