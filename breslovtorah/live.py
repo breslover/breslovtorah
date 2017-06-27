@@ -2,7 +2,7 @@ from settings import *
 
 DEBUG = False
 
-DEFAULT_FROM_EMAIL = 'no-reply@breslovtorah.net'
+DEFAULT_FROM_EMAIL = 'no-reply@breslover.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'mail.pawnmail.com'

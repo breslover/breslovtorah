@@ -59,7 +59,7 @@
                     <i class="glyphicon glyphicon-align-justify"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="/index.html#page-top">
-                    <i class="glyphicon glyphicon-play-circle"></i>  <span class="light">Breslov</span>Torah<span class="light"></span>
+                    <i class="glyphicon glyphicon-play-circle"></i>  <span class="light">Breslover</span><span class="light"></span>
                 </a>
             </div>
 
@@ -92,7 +92,8 @@
     </nav>
 	
 	{% block content %}
-	
+
+    {% comment %}
     <!-- Intro Header -->
     <header class="intro">
         <div class="intro-body">
@@ -100,7 +101,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                     	
-                    	{% if daily_shiur %}
+                    	{% if not daily_shiur %}
                     		<h1 class="brand-heading brand-daily-shiur" style='padding-left:15px;'>{{daily_shiur.title}}</h1>
                     		<iframe id="player_1" style="margin-left: 20px;" src="{{daily_shiur.video_url}}" frameborder="0" width="90%" height="300"></iframe>
                         	<div>
@@ -123,16 +124,34 @@
             </div>
         </div>
     </header>
+    {% endcomment %}
 
 	<!-- About Section -->
     <section id="shiurim" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
             	
-            	
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"></h3>
+			</div>
+			<div class="panel-body">
+				<div class="list-group">
+					{% for sefer in sefers_arvi %}
+						<a href="{% url 'sefer' sefer.slug %}" class="list-group-item">
+                                                <span class="badge"><i class='glyphicon glyphicon-chevron-right'></i></span>
+                                                {{sefer.title|safe}}
+                                                </a>
+					{% endfor %}
+				</div>
+			</div>
+
+					
+		</div>
+		{% comment %}            	
             	<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Rav Tzvi Aryeh Rosenfeld ZT'L Shiurim</h3>
+						<h3 class="panel-title">Rav Rosenfeld ZT'L Shiurim</h3>
 					</div>
 					<div class="panel-body">
 						
@@ -153,7 +172,7 @@
             	
 	            <div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Rav Nasan Maimon Shiurim</h3>
+						<h3 class="panel-title">Rav Maimon Shiurim</h3>
 					</div>
 					<div class="panel-body">
 						
@@ -175,7 +194,7 @@
 						
 					</div>
 			    </div>
-            
+            		{% endcomment %}
                 
             </div>
         </div>

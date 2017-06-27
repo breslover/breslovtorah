@@ -27,10 +27,11 @@ def home(request):
     # grab the list of sefarim from the Sefer table
     sefers_maimon = Sefer.objects.filter(user__username='maimon')
     sefers_rosenfeld = Sefer.objects.filter(user__username='rosenfeld')
-    
+    sefers_arvi = Sefer.objects.filter(user__username='arvi')    
     # load the template
     t = loader.get_template('base.html')
-    c = Context({ 'request': request, 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon, 'sefers_rosenfeld': sefers_rosenfeld })
+    c = Context({ 'request': request, 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon, 'sefers_rosenfeld': sefers_rosenfeld, 'sefers_arvi': sefers_arvi })
+
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"
 
 def sefer(request, slug=None):
