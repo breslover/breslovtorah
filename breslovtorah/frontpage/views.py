@@ -7,7 +7,7 @@ Created on Nov 2, 2014
 import logging
 logger = logging.getLogger(__name__)
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, Context
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -33,7 +33,7 @@ def home(request):
     c = Context({ 'request': request, 'daily_shiur': daily_shiur, 'sefers_maimon': sefers_maimon, 'sefers_rosenfeld': sefers_rosenfeld, 'sefers_arvi': sefers_arvi })
 
     return HttpResponse(t.render(c)) # content_type="application/xhtml+xml"
-
+    #return HttpResponseRedirect('http://breslev.co.il')
 def sefer(request, slug=None):
     
     page = request.GET.get('page', None)
