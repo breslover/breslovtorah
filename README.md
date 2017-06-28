@@ -1,6 +1,7 @@
-Welcome to the BreslovTorah.com project
 ===============================================
+A website for Breslov powered by volunteerism and love of the One Above.
 
-The new BreslovTorah website will be powered by Django, Django Rest Framework, Responsive Bootstrap, node.js uncss and more.
+Completely open source and feel free to use it -- it is a gift to anyone who wishes to host audio shiurim.
 
-Contact breslover.com@gmail.com to be added to the project.  There is much good work to be done.
+Love only
+
